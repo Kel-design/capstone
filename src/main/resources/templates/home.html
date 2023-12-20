@@ -8,6 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <link rel="stylesheet" type="text/css" th:href="@{/images/home.css}" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
@@ -38,7 +40,8 @@
 <div>
     <div class="container-fluid" role="navigation">
         <div class="text-center py-2">
-            <img src="../static/images/logo-black.png" alt="" height="130">
+
+            <img src="../images/logo-black.png" alt="Logo" height="130">
         </div>
         <div class="row text-center align-items-center g-0">
             <div class="col-lg-5 col-md-5 d-none d-lg-block d-md-block d-xs-none ms-auto">
@@ -63,7 +66,7 @@
                 <div class="d-flex justify-content-around border-top border-bottom border-dark">
                     <div class="customLink"><a class="d-inline-block p-3" th:href="@{/our_story}">Our Story</a></div>
                     <div class="customLink"><a class="d-inline-block p-3" th:href="@{/contact_us}">Contact Us</a></div>
-                    <div class="customLink"><a class="d-inline-block p-3" href="#">Newsletter Sign Up</a></div>
+                    <div class="customLink"><a class="d-inline-block p-3" th:href="@{/register}">Newsletter Sign Up / Login</a></div>
                 </div>
             </div>
         </div>
@@ -73,7 +76,7 @@
 <div class="container-fluid">
     <div class="row mx-3 mt-4">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center border border-dark shadow-lg rounded-3" style="height:450px;background:url('../static/images/books_banner.jpg') no-repeat;background-position:center;background-size:cover">
+            <div class="d-flex justify-content-center align-items-center border border-dark shadow-lg rounded-3" style="height:450px;background:url('../images/books_banner.jpg') no-repeat;background-position:center;background-size:cover">
                 <div class="text-center text-black">
                     <h1>Hand poured in Austin, Texas</h1>
                     <p>All natural & long lasting 100% Soy Candles</p>
@@ -97,21 +100,21 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="10000">
-            <img src="../static/images/large_grey_candle.jpg" class="d-block w-50 mx-auto" alt="...">
+            <img src="../images/large_grey_candle.jpg" class="d-block w-50 mx-auto" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                 <p>Some representative placeholder content for the first slide.</p>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-            <img src="../static/images/medium_clear_candle.jpg" class="d-block w-50 mx-auto" alt="...">
+            <img src="../images/medium_clear_candle.jpg" class="d-block w-50 mx-auto" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
                 <p>Some representative placeholder content for the second slide.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../static/images/small_black_candle.jpg" class="d-block w-50 mx-auto" alt="...">
+            <img src="../images/small_black_candle.jpg" class="d-block w-50 mx-auto" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Some representative placeholder content for the third slide.</p>

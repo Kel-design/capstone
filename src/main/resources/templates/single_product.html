@@ -36,7 +36,7 @@
 <div>
     <div class="container-fluid" role="navigation">
         <div class="text-center py-2">
-            <img src="../static/images/logo-black.png" alt="" height="130">
+            <img src="../images/logo-black.png" alt="" height="130">
         </div>
         <div class="row text-center align-items-center g-0">
             <div class="col-lg-5 col-md-5 d-none d-lg-block d-md-block d-xs-none ms-auto">
@@ -59,9 +59,9 @@
             </div>
             <div class="col-lg-5 col-md-5 d-none d-lg-block d-md-block d-xs-none me-auto">
                 <div class="d-flex justify-content-around border-top border-bottom border-dark">
-                    <div class="customLink"><a class="d-inline-block p-3" href="#">Our Story</a></div>
+                    <div class="customLink"><a class="d-inline-block p-3" th:href="@{/our_story}">Our Story</a></div>
                     <div class="customLink"><a class="d-inline-block p-3" th:href="@{/contact_us}">Contact Us</a></div>
-                    <div class="customLink"><a class="d-inline-block p-3" href="#">Newsletter Sign Up</a></div>
+                    <div class="customLink"><a class="d-inline-block p-3" th:href="@{/register}">Newsletter Sign Up / Login</a></div>
                 </div>
             </div>
         </div>
@@ -75,13 +75,13 @@
         <div class="row">
             <div class="col-lg-2 order-lg-1 order-2">
                 <ul class="image_list">
-                    <li data-image><img src="../static/images/medium_clear_candle.jpg" alt="Medium 8 oz candle"></li>
-                    <li data-image><img src="../static/images/small_black_candle.jpg" alt="Small 4 oz candle"></li>
+                    <li data-image><img src="../images/medium_clear_candle.jpg" alt="Medium 8 oz candle"></li>
+                    <li data-image><img src="../images/small_black_candle.jpg" alt="Small 4 oz candle"></li>
                     <li data-image><img src="..." alt="Candle Scent Image"></li>
                 </ul>
             </div>
             <div class="col-lg-4 order-lg-2 order-1">
-                <div class="image_selected"><img src="../static/images/large_grey_candle.jpg" alt=""></div>
+                <div class="image_selected"><img src="../images/large_grey_candle.jpg" alt=""></div>
             </div>
             <div class="col-lg-6 order-3">
                 <div class="product_description">
