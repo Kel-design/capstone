@@ -27,7 +27,12 @@ public class Customer {
 
     String zipCode;
 
+    String phone;
+
     String email;
+    
+    @Column(nullable = false)
+    String username;
 
     @Column(nullable = false, unique = true)
     String password;
