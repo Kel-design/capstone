@@ -20,7 +20,15 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
             http.csrf(csrf -> csrf.disable())
                     .authorizeHttpRequests((authorize) -> authorize
-                            .requestMatchers("/home").permitAll()
+                                    .requestMatchers("/home").permitAll()
+                                    .requestMatchers("/candles").permitAll()
+                                    .requestMatchers("/scents").permitAll()
+                                    .requestMatchers("/single_product").permitAll()
+                                    .requestMatchers("/our_story").permitAll()
+                                    .requestMatchers("/contact_us").permitAll()
+                                    .requestMatchers("/shopping_cart").permitAll()
+
+
                     //continue building security chain AND form login in AND logout
 
                     );
