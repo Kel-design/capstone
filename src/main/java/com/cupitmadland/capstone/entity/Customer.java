@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class Customer {
     String phone;
 
     String email;
-    
+
     @Column(nullable = false)
     String username;
 
@@ -49,5 +50,11 @@ public class Customer {
     //Creating a @OneToMany entity relationship for Customer to Payment using customer_id
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Payment> paymentList;
+
+    //Creating a @ManyToMany entity relationship for Customer to Role using customer_id and role_id
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_roles", joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
+    inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    public List<Role> roles = new ArrayList<>();
 
 }
