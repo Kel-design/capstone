@@ -25,13 +25,15 @@ public class SpringSecurity {
                                     .requestMatchers("/candles").permitAll()
                                     .requestMatchers("/scents").permitAll()
                                     .requestMatchers("/single_product").permitAll()
+                                    .requestMatchers("/product/**").permitAll()
                                     .requestMatchers("/our_story").permitAll()
                                     .requestMatchers("/contact_us").permitAll()
                                     .requestMatchers("/shopping_cart").permitAll()
+                                    .requestMatchers("/order_details").permitAll()
                                     .requestMatchers("/register/**").permitAll()
                                     .requestMatchers("/login").permitAll()
                                     .requestMatchers("/newsletter").hasRole("USER")
-                                    .requestMatchers("/images/**").permitAll().anyRequest().authenticated()
+                                    .requestMatchers("/static/**").permitAll().anyRequest().authenticated()
 
 
                     //continue building security chain AND form login in AND logout
