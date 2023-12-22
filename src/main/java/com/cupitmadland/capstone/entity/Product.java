@@ -19,6 +19,10 @@ public class Product {
 
     String description;
 
+    private String scent;
+
+    private String size;
+
     BigDecimal price;
 
     Integer stockQuantity;
@@ -28,7 +32,7 @@ public class Product {
     @JoinColumn(name = "custOrder_id")
     private CustOrder custOrder;
 
-    //Creating a @ManyToOne entity relationshiip for Product and ShoppingCart using shoppingCart_id
+    //Creating a @ManyToOne entity relationship for Product and ShoppingCart using shoppingCart_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shoppingCart_id")
     private ShoppingCart shoppingCart;
