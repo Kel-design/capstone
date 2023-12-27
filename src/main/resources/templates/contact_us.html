@@ -60,7 +60,7 @@
             <div class="col-lg-5 col-md-5 d-none d-lg-block d-md-block d-xs-none me-auto">
                 <div class="d-flex justify-content-around border-top border-bottom border-dark">
                     <div class="customLink"><a class="d-inline-block p-3" th:href="@{/our_story}">Our Story</a></div>
-                    <div class="customLink"><a class="d-inline-block p-3" th:href="@{/contact_us}">Contact Us</a></div>
+                    <div class="customLink"><a class="d-inline-block p-3" th:href="@{/contact_us}" style="text-decoration: underline;">Contact Us</a></div>
                     <div class="customLink"><a class="d-inline-block p-3" th:href="@{/register}">Newsletter Sign Up / Login</a></div>
                 </div>
             </div>
@@ -74,15 +74,15 @@
         <div class="row mt-4">
             <div class="col-lg-8 offset-lg-2">
 <h1>Contact Us!</h1>
-<form id="contact_form" name="contact_form" method="post">
+<form id="contact_form" name="contact_form" method="post" th:action="@{/contact_us/save}" th:object="${contactInfo}">
     <div class="mb-5 row">
         <div class="col">
             <label>First Name</label>
-            <input type="text" required maxlength="50" class="form-control" id="first_name" name="first_name">
+            <input type="text" required maxlength="50" class="form-control" id="first_name" name="firstName">
         </div>
         <div class="col">
             <label>Last Name</label>
-            <input type="text" required maxlength="50" class="form-control" id="last_name" name="last_name">
+            <input type="text" required maxlength="50" class="form-control" id="last_name" name="lastName">
         </div>
     </div>
     <div class="mb-5 row">
@@ -93,7 +93,7 @@
         </div>
         <div class="col">
             <label for="phone_input">Phone</label>
-            <input type="tel" required maxlength="50" class="form-control" id="phone_input" name="Phone"
+            <input type="tel" required maxlength="50" class="form-control" id="phone_input" name="phone"
                    placeholder="Phone">
         </div>
     </div>
@@ -105,6 +105,8 @@
 </form>
             </div>
         </div>
+    </div>
+</div>
 
 
 
