@@ -7,9 +7,9 @@ function updateProduct(productName, productPrice, productDescription, imageUrl, 
     //let productDescription = [[${product.description}]];
 
     //Determine the appropriate image file based on the selected size
-    //let imageUrl = size === 'Large' ? '/static/images/large_grey_candle.jpg' :
-        //(size === 'Medium' ? '/static/images/medium_clear_candle.jpg' :
-           // (size === 'Small' ? '/static/images/small_black_candle.jpg' : '/static/images/large_grey_candle.jpg'));
+    //let imageUrl = size === 'Large' ? '/static/images/large_candle.jpg' :
+        //(size === 'Medium' ? '/static/images/medium_candle.jpg' :
+           // (size === 'Small' ? '/static/images/small_candle.jpg' : '/static/images/large_candle.jpg'));
 
 
     document.getElementById('productName').innerText = productName;

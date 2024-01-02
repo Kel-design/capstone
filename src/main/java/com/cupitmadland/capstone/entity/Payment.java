@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,7 +19,7 @@ public class Payment {
 
     Timestamp paymentDate;
 
-    BigDecimal total;
+    BigDecimal totalAmount;
 
     String creditCardNum;
 
@@ -32,6 +33,10 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    // Creating a @OneToMany entity relation for Payment to CartItem
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
 
 }

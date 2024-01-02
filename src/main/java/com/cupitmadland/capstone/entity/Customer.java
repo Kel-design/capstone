@@ -18,6 +18,8 @@ public class Customer {
 
     String firstName;
 
+    String middleName;
+
     String lastName;
 
     String address;
@@ -32,10 +34,13 @@ public class Customer {
 
     String email;
 
-    @Column(nullable = false)
+    @Column(name = "message", length = 1000)
+    String message;
+
+    @Column(nullable = true)
     String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     String password;
 
     //Creating a @OneToOne entity relationship for Customer to Shopping Cart using shoppingCartId
@@ -44,11 +49,11 @@ public class Customer {
     private ShoppingCart shoppingCart;
 
     //Creating a @OneToMany entity relationship for Customer to CustOrder using customer_id
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    private List<CustOrder> custOrderList;
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    //private List<CustOrder> custOrderList;
 
     //Creating a @OneToMany entity relationship for Customer to Payment using customer_id
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Payment> paymentList;
 
     //Creating a @ManyToMany entity relationship for Customer to Role using customer_id and role_id
@@ -57,4 +62,17 @@ public class Customer {
     inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     public List<Role> roles = new ArrayList<>();
 
-}
+    // Creating a bidirectional @OneToMany relationship for Customer to CartItem
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    // New method to add a CartItem to the list and set the customer reference
+    public void addCartItems(List<CartItem> cartItems) {
+        cartItems.forEach(cartItem -> {
+            cartItem.setCustomer(this);
+            this.cartItems.add(cartItem);
+        });
+
+        }
+    }
+

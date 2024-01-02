@@ -40,9 +40,15 @@ public class ProductServiceImpl implements ProductService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    // Saves a product to the database.
     @Override
     public void saveProduct(Product product) {
-//write code here!
+    if (product == null){
+        throw new IllegalArgumentException("Invalid product");
+    }
+    // Save the product
+        productRepository.save(product);
     }
 
     @Override
@@ -62,5 +68,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllProduct() {
         List<Product> productList = productRepository.findAll();
         return productList;
+    }
+
+    @Override
+    public Product findProductBySizeAndScent(String size, String scent) {
+        //Using the findBySize method from the productRepository
+        return productRepository.findBySizeAndScent(size, scent).orElse(null);
     }
 }

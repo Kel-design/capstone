@@ -28,9 +28,9 @@ public class Product {
     Integer stockQuantity;
 
     //Creating a @ManyToOne entity relationship for Product and CustOrder using custOrder_id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "custOrder_id")
-    private CustOrder custOrder;
+   // @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "custOrder_id")
+    //private CustOrder custOrder;
 
     //Creating a @ManyToOne entity relationship for Product and ShoppingCart using shoppingCart_id
     @ManyToOne(fetch = FetchType.LAZY)

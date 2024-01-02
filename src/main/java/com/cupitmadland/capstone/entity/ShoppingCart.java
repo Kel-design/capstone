@@ -26,5 +26,8 @@ public class ShoppingCart {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart")
     private List<Product> productList;
 
+    //Creating @OneToMany entity relationship for ShoppingCart and CartItem using shoppingCart_id
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart")
+    private List<CartItem> cartItemList;
 
 }

@@ -25,11 +25,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     private ShoppingCartRepository shoppingCartRepository;
 
+    private CartItemRepository cartItemRepository;
+
     private PasswordEncoder passwordEncoder;
 
     public CustomerServiceImpl(CustomerRepository customerRepository, CustOrderRepository custOrderRepository, PaymentRepository paymentRepository,
                                ProductRepository productRepository, RoleRepository roleRepository, ShoppingCartRepository shoppingCartRepository,
-                               PasswordEncoder passwordEncoder){
+                               CartItemRepository cartItemRepository, PasswordEncoder passwordEncoder){
         super();
         this.customerRepository = customerRepository;
         this.custOrderRepository = custOrderRepository;
@@ -37,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.productRepository = productRepository;
         this.roleRepository = roleRepository;
         this.shoppingCartRepository = shoppingCartRepository;
+        this.cartItemRepository = cartItemRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -44,15 +47,24 @@ public class CustomerServiceImpl implements CustomerService {
     public void saveCustomer(Customer customer) {
         //need to write code here!
 
-        customer.setUsername(customer.getUsername());
+
         customer.setEmail(customer.getEmail());
-        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+
+        // Only encode the password if it is not null or empty
+        if (customer.getPassword() != null && !customer.getPassword().isEmpty()) {
+            customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        }
 
         Role role = roleRepository.findByName("ROLE_USER");
         if (role == null) {
             role = checkRoleExist();
         }
         customer.setRoles(Arrays.asList(role));
+
+        // Set a default username if it is null or empty
+        if (customer.getUsername() == null || customer.getUsername().isEmpty()) {
+            customer.setUsername("default_username");
+        }
         customerRepository.save(customer);
     }
 

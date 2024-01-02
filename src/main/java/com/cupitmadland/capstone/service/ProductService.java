@@ -11,5 +11,8 @@ public interface ProductService {
 
     List<Product> findAllProduct();
 
+    //New method to find a product by size AND scent
+    Product findProductBySizeAndScent(String size, String scent);
+
 
 }

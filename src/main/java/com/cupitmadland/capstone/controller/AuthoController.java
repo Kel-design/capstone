@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class AuthoController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
     @Autowired
     public AuthoController(CustomerService  customerService) {this.customerService = customerService;}
 
@@ -32,17 +32,17 @@ public class AuthoController {
     @GetMapping("/single_product")
     public String singleProduct() { return "single_product"; }
 
-    @GetMapping("/shopping_cart")
-    public String shoppingCart() { return "shopping_cart"; }
+    //@GetMapping("/shopping_cart")
+    //public String shoppingCart() { return "shopping_cart"; }
 
-    @GetMapping("/order_details")
-    public String orderDetails() { return "order_details"; }
+    //@GetMapping("/order_details")
+    //public String orderDetails() { return "order_details"; }
 
     @GetMapping("/our_story")
     public String ourStory() { return "our_story"; }
 
-    @GetMapping("/contact_us")
-    public String contactUs() { return "contact_us"; }
+   // @GetMapping("/contact_us")
+   // public String contactUs() { return "contact_us"; }
 
     @GetMapping("/login")
     public String login() { return "login"; }
@@ -77,10 +77,5 @@ public class AuthoController {
 
         return "newsletter";
     }
-
-
-
-
-
 
 }

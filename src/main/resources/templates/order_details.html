@@ -50,7 +50,7 @@
     <div class="container">
         <!-- Title -->
         <div class="d-flex justify-content-between align-items-center py-3">
-            <h2 class="h5 mb-0"><a href="#" class="text-muted"></a>Thank you for your Order! Order #16123222</h2>
+            <h2 class="h5 mb-0" th:text="'Thank you for your order! Your order # is ' + ${payment.id}" ></h2>
         </div>
 
         <!-- Main content -->
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="flex-lg-grow-1 ms-3">
                                             <h6 class="small mb-0"><a href="#" class="text-reset">Wireless Headphones with Noise Cancellation Tru Bass Bluetooth HiFi</a></h6>
-                                            <span class="small">Color: Black</span>
+                                            <span class="small">Size: Black</span>
                                         </div>
                                     </div>
                                 </td>
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="flex-lg-grow-1 ms-3">
                                             <h6 class="small mb-0"><a href="#" class="text-reset">Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h6>
-                                            <span class="small">Color: White</span>
+                                            <span class="small">Size: White</span>
                                         </div>
                                     </div>
                                 </td>

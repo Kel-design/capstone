@@ -21,18 +21,22 @@ public class CustOrder {
     BigDecimal totalAmount;
 
     //Creating an @OneToOne entity relationship for CustOrder to Payment using paymentId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paymentId")
-    private Payment payment;
+    //@OneToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "paymentId")
+    //private Payment payment;
 
     //Creating a @ManyToOne entity relationship for CustOrder to Customer using customer_id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "customer_id")
+    //private Customer customer;
 
     //Creating a @OneToMany entity relationship for CustOrder to Product using custOrder_id
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "custOrder")
-    private List<Product> productList;
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "custOrder")
+    //private List<Product> productList;
+
+    // Creating a @OneToMany entity relationship for CustOrder to CartItems using custOrder_id
+    //@OneToMany(fetch= FetchType.LAZY, mappedBy = "custOrder")
+    //private List<CartItem> cartItems;
 
 
 

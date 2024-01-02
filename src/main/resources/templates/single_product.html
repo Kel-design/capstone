@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <title></title>
@@ -17,51 +17,6 @@
     <!-- JavaScript to call the updateProduct function -->
     <script th:inline="javascript">
         $(document).ready(function () {
-        // Define updateProduct function here
-        function updateProduct(name, price, description, size){
-            //Set the visibility of product details based on the selected size
-            $('.product-details').hide();
-            $('#' + size + '-details').show();
-
-            // Update product details
-            $('#productName').text(name);
-            $('#productPrice').text('$' + price);
-            $('#productDescription').text(description);
-
-            // Get product image URL dynamically based on selected size
-            const imageSize = getImageUrl(size);
-
-            let productImage = $('#productImage');
-            if (productImage) {
-                productImage.attr('src', imageSize);
-            }
-
-            // Log details in console for testing
-            console.log('Update Product Called:', name, price, description, imageSize, size);
-        }
-
-            // Size button click event listener
-            $('#largeButton, #mediumButton, #smallButton').click(function () {
-                updateProduct(
-                    $('#productName').text(),
-                    $('#productPrice').text().replace('$', ''),
-                    $('#productDescription').text(),
-                    this.getAttribute("data-size")
-                );
-            });
-
-            // Define getImageUrl function here
-            function  getImageUrl(size) {
-                if (size === 'Large') {
-                    return '/static/images/large_grey_candle.jpg';
-                } else if (size === 'Medium') {
-                    return '/static/images/medium_clear_candle.jpg';
-                } else if (size === 'Small') {
-                    return '/static/images/small_black_candle.jpg';
-                } else {
-                    return '/static/images/large_grey_candle.jpg';  //Default image
-                }
-            }
 
             // Set initial quantity
             let quantity = 1;
@@ -76,13 +31,6 @@
                 quantity++;
                 updateQuantity();
 
-                //Call updateProduct with the selected size
-                updateProduct(
-                    $('#productName').text(),
-                    $('#productPrice').text().replace('$', ''), //Convert price to a number
-                    $('#productDescription').text(),
-                    $('#productOptions').find(':selected').text()  // Pass the selected size as an argument
-                );
             });
 
             // Decrease quantity on minus button click
@@ -90,16 +38,7 @@
                 if (quantity > 1) {
                     quantity--;
                     updateQuantity();
-
-                    //Call updateProduct with the selected size
-                    updateProduct(
-                        $('#productName').text(),
-                        $('#productPrice').text().replace('$', ''),
-                        $('#productDescription').text(),
-                        $('#productOptions').find(':selected').text()  // Pass the selected size as an argument
-                    );
                 }
-
             });
 
             //handle add to cart button click (ADD IMAGE!)
@@ -107,28 +46,18 @@
                 let productName = $('#productName').text();
                 let productPrice = $('#productPrice').text().replace('$', '');
                 let productQuantity = $('#quantity_input').val();
+                let productSize = $('.productSize').val();
 
                 //NEED ACTION TO ADD THE PRODUCT TO THE shopping_cart in database
 
                 //trying to log details to console just to see if it's working
-                console.log('Added to cart:', productName, productPrice, productQuantity);
+                console.log('Added to cart:', productName, productPrice, productQuantity, productSize);
             });
 
             // Set initial quantity
             updateQuantity();
 
-            // Update image based on size selected
-            $('#productOptions').change(function () {
-                let selectedSize = $(this).find(':selected').text();
-                let imageUrl = getImageUrl(selectedSize);
-                updateProduct(
-                    $('#productName').text(),
-                    $('#productPrice').text().replace('$', ''),
-                    $('#productDescription').text(),
-                    imageUrl,
-                    selectedSize
-                );
-            });
+
         });
     </script>
 
@@ -264,7 +193,7 @@
             justify-content: center;
             align-items: center;
             width: calc(100% + 15px);
-            height: 525px;
+            height: 570px;
             border: solid 1px #e8e8e8;
             box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -280,7 +209,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 165px;
+            width: auto;
+            height: 180px;
             border: solid 1px #e8e8e8;
             box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
             margin-bottom: 15px;
@@ -339,16 +269,17 @@
             <div class="row">
                 <div class="col-lg-2 order-lg-1 order-2">
                     <ul class="image_list">
-                        <li data-image><img th:src="${'/static/images/medium_clear_candle.jpg'}" alt="Medium 8 oz candle"></li>
-                        <li data-image><img th:src="${'/static/images/small_black_candle.jpg'}" alt="Small 4 oz candle"></li>
-                        <li data-image><img src="..." alt="Candle Scent Image"></li>
+                        <li data-image><img th:src="${'/static/images/large_candle.png'}" alt="Large 11 oz candle"></li>
+                        <li data-image><img th:src="${'/static/images/medium_candle.png'}" alt="Medium 8 oz candle"></li>
+                        <li data-image><img th:src="${'/static/images/small_candle.png'}" alt="Small 4 oz candle"></li>
+
                     </ul>
                 </div>
 
                 <!-- Selected product image -->
                 <div class="col-lg-4 order-lg-2 order-1">
                     <div class="image_selected">
-                        <img id="productImage" th:src="${'/static/images/large_grey_candle.jpg'}" alt="Large 11 oz candle">
+                        <img id="productImage" th:src="@{'/static/images/' + ${imageBySize} + '_candle.png'}" alt="Large 11 oz candle">
                     </div>
                 </div>
 
@@ -361,7 +292,7 @@
                         <span id="productDescription" th:text="${product.description}"></span><br>
                         <!-- trying to see if displaying size helps -->
                         <span id="productSize" th:text="${product.size}"></span><br>
-                        <!-- <img id="productImage" th:src="${'/static/images/large_grey_candle.jpg'}" alt="Large Candle"> -->
+                        <!-- <img id="productImage" th:src="${'/static/images/large_candle.jpg'}" alt="Large Candle"> -->
 
                         <div>
                             <div class="row">
@@ -385,9 +316,16 @@
                             <div class="row" style="margin-top: 15px;">
                                 <div class="col-xs-6" style="margin-left: 15px;">
                                     <span class="product_options">Candle Sizes</span><br>
-                                    <button id="largeButton" class="btn btn-primary btn-sm size-button" data-size="Large" data-scent="@{product.scent}">Large (11 ozs)</button>
-                                    <button id="mediumButton" class="btn btn-primary btn-sm size-button" data-size="Medium" data-scent="@{product.scent}">Medium (8 ozs)</button>
-                                    <button id="smallButton" class="btn btn-primary btn-sm size-button" data-size="Small" data-scent="@{product.scent}">Small (4 ozs)</button>
+                                    <a th:href="@{'/product/' + ${productBaseId} + '/details'}">
+                                    <button id="largeButton" class="btn btn-primary btn-sm size-button">Large (11 ozs)</button>
+                                    </a>
+                                    <a th:href="@{'/product/' + ${productBaseId + 1} + '/details'}">
+                                    <button id="mediumButton" class="btn btn-primary btn-sm size-button">Medium (8 ozs)</button>
+                                    </a>
+
+                                    <a th:href="@{'/product/' + ${productBaseId + 2} + '/details'}">
+                                    <button id="smallButton" class="btn btn-primary btn-sm size-button">Small (4 ozs)</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -401,30 +339,36 @@
                     <!-- Quantity controls and Add to Cart button -->
                     <div class="row">
                         <div class="col-xs-6" style="margin-left: 15px;">
-                            <div class="product_quantity">
-                                <span>QTY: </span>
-                                <div class="quantity_controls">
-                                    <div id="quantity_dec_button" class="quantity_control"><i class="fas fa-minus"></i></div>
-                                    <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-                                    <div id="quantity_inc_button" class="quantity_control"><i class="fas fa-plus"></i></div>
-                                </div>
-                            </div>
+
                         </div>
+                            <div class="container mt-3"> <!-- Add margin-top to create space -->
 
-                        <div class="container mt-3"> <!-- Add margin-top to create space -->
 
-                            <div class="col-xs-6" style="margin-left: 15px;">
-                                <button type="button" class="btn btn-primary shop-button">Add to Cart</button>
-
+                                     <form action="#" th:action="@{/addToCart}" method="post" th:object="${cartItemDTO}">
+                                         <div class="product_quantity">
+                                             <span>QTY: </span>
+                                             <div class="quantity_controls">
+                                                 <div id="quantity_dec_button" class="quantity_control"><i class="fas fa-minus"></i></div>
+                                                 <input id="quantity_input" type="text" pattern="[0-9]*" th:field="*{productQuantity}" value="1">
+                                                 <div id="quantity_inc_button" class="quantity_control"><i class="fas fa-plus"></i></div>
+                                             </div>
+                                         </div>
+                                        <input type="hidden" th:field="*{productId}" th:value="${product.id}" />
+<!--                                        <input type="hidden" th:field="${product.name}" th:value:="${product.name}" />-->
+<!--                                        <input type="hidden" th:field="${product.price}" th:value="${product.price}"/>-->
+<!--                                       <input type="hidden" th:field="${product.size}" th:value="${product.size}" />-->
+                                        <button type="submit" class="btn btn-primary shop-button">Add to Cart</button>
+                                    </form>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+
+
 </body>
 
 </html>
