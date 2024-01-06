@@ -6,6 +6,7 @@ import com.cupitmadland.capstone.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class FindByEmailTest {
 
 
     @Test
+    @Transactional
     public void testFindByEmailTest() {
         Customer expectedCustomer = new Customer();
 
