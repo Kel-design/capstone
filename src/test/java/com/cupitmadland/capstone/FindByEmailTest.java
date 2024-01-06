@@ -20,7 +20,7 @@ public class FindByEmailTest {
 
     @Autowired
     public FindByEmailTest(CustomerRepository customerRepository){
-        this.customerRepository= customerRepository;
+        this.customerRepository = customerRepository;
     }
 
 
