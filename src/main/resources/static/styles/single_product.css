@@ -1,4 +1,17 @@
-@charset "utf-8";
+.customLink > a{
+    text-decoration : none;
+    color:#232323;
+}
+#circleIcon7 {
+    width : 60px;
+    height:60px;
+    line-height:60px;
+    border:2px dotted #232323;
+    border-radius:100%;
+    text-align:center
+}
+
+
 
 .single_product {
     padding-top: 66px;
@@ -42,6 +55,7 @@
 }
 
 .product_quantity {
+    margin-bottom: 20px; /* Adding margin-bottom space */
     display: flex;
     align-items: center;
 }
@@ -116,11 +130,16 @@
     justify-content: center;
     align-items: center;
     width: calc(100% + 15px);
-    height: 525px;
+    height: 570px;
     border: solid 1px #e8e8e8;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     padding: 15px
+}
+.image_selected img {
+    max-width: 100%; /* Set max-width to 100% to fit image in container */
+    max-height: 100%; /* Set max-height to 100% to fit image in container */
+    object-fit: contain; /* This specifies how the content should be resized */
 }
 
 .image_list li {
@@ -132,7 +151,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 165px;
+    width: auto;
+    height: 180px;
     border: solid 1px #e8e8e8;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
     margin-bottom: 15px;
@@ -144,4 +164,8 @@
     -o-transition: all 200ms ease;
     transition: all 200ms ease;
     overflow: hidden
+}
+.image_list li img {
+    max-height: 100%; /* Getting image to fit within the container */
+    width: auto; /* Setting auto to maintain aspect ratio */
 }
