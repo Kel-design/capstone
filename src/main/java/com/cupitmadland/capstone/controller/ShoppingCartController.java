@@ -46,6 +46,9 @@ public class ShoppingCartController {
         this.cartItemRepository = cartItemRepository;
     }
 
+    @GetMapping("")
+    public String shoppingCart() { return "shopping_cart"; }
+
     @PostMapping("/addToCart")
     public String addToCart(@ModelAttribute CartItemDTO cartItemDTO, Model model, HttpSession session){
 

@@ -32,8 +32,7 @@ public class AuthoController {
     @GetMapping("/single_product")
     public String singleProduct() { return "single_product"; }
 
-    //@GetMapping("/shopping_cart")
-    //public String shoppingCart() { return "shopping_cart"; }
+
 
     //@GetMapping("/order_details")
     //public String orderDetails() { return "order_details"; }
