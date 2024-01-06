@@ -5,6 +5,7 @@ import com.cupitmadland.capstone.DTO.CheckoutDataDTO;
 import com.cupitmadland.capstone.entity.*;
 import com.cupitmadland.capstone.repository.*;
 import com.cupitmadland.capstone.service.ShoppingCartService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -125,6 +126,11 @@ public class ShoppingCartController {
         // Loop over cartItems telling each cartItem which payment it is associated with
        for(CartItem cartItem : cartItems) {
            cartItem.setPayment(payment);
+
+           // Setting updated stock Quantity to CartItem product when item is subtracted/purchased at Checkout
+           Integer newStockQuantity = cartItem.getProduct().getStockQuantity() - cartItem.getQuantity();
+           cartItem.getProduct().setStockQuantity(newStockQuantity);
+           productRepository.save(cartItem.getProduct());
        }
         payment.setCartItems(cartItems);
 
