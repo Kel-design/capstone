@@ -38,7 +38,7 @@ public class SpringSecurity {
                                     .requestMatchers("/view").permitAll()
                                     .requestMatchers("/order_details").permitAll()
                                     .requestMatchers("/register/**").permitAll()
-                                    .requestMatchers("/javascript/**").permitAll()
+                                    .requestMatchers("/static/javascript/**").permitAll()
                                     .requestMatchers("/login").permitAll()
                                     .requestMatchers("/newsletter/**").hasRole("USER")
                                     .requestMatchers("/static/**").permitAll().anyRequest().authenticated()
