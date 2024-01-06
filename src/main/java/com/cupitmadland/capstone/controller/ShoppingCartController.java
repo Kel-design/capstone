@@ -3,10 +3,7 @@ package com.cupitmadland.capstone.controller;
 import com.cupitmadland.capstone.DTO.CartItemDTO;
 import com.cupitmadland.capstone.DTO.CheckoutDataDTO;
 import com.cupitmadland.capstone.entity.*;
-import com.cupitmadland.capstone.repository.CustomerRepository;
-import com.cupitmadland.capstone.repository.PaymentRepository;
-import com.cupitmadland.capstone.repository.ProductRepository;
-import com.cupitmadland.capstone.repository.ShoppingCartRepository;
+import com.cupitmadland.capstone.repository.*;
 import com.cupitmadland.capstone.service.ShoppingCartService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,15 +32,18 @@ public class ShoppingCartController {
 
     private final PaymentRepository paymentRepository;
 
+    private final CartItemRepository cartItemRepository;
+
     @Autowired
     public  ShoppingCartController(ShoppingCartService shoppingCartService, ProductRepository productRepository,
                                    ShoppingCartRepository shoppingCartRepository, CustomerRepository customerRepository,
-                                   PaymentRepository paymentRepository){
+                                   PaymentRepository paymentRepository, CartItemRepository cartItemRepository){
         this.shoppingCartService = shoppingCartService;
         this.productRepository = productRepository;
         this.shoppingCartRepository = shoppingCartRepository;
         this.customerRepository = customerRepository;
         this.paymentRepository = paymentRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
     @PostMapping("/addToCart")
@@ -102,9 +102,9 @@ public class ShoppingCartController {
     public String processCheckout(Payment payment,
                                   HttpSession session,
                                   @ModelAttribute Customer customer,
-                                  Model model){
+                                  Model model,@ModelAttribute CheckoutDataDTO checkoutDataDTO){
 
-       // customer=customerRepository.findById(customer.getId()).get();
+
 
         // Retrieve the cart items and customer from the session
         List<CartItem> cartItems =customer.getCartItems();
@@ -119,7 +119,14 @@ public class ShoppingCartController {
 
 
         // Set the cart items associated with the payment
+        // Loop over cartItems telling each cartItem which payment it is associated with
+       for(CartItem cartItem : cartItems) {
+           cartItem.setPayment(payment);
+       }
         payment.setCartItems(cartItems);
+
+
+
 
         // Save the payment info with the customer & then re-save customer in Customer Repository
         customer.getPaymentList().add(payment);
@@ -172,6 +179,10 @@ public class ShoppingCartController {
         customer.setFirstName(firstName);
         customer.setMiddleName(middleName);
         customer.setLastName(lastName);
+        customer.setAddress(checkoutDataDTO.getAddress());
+        customer.setCity(checkoutDataDTO.getCity());
+        customer.setState(checkoutDataDTO.getState());
+        customer.setZipCode(checkoutDataDTO.getZipCode());
         customer.setPaymentList (new ArrayList<>());
 
         // Save customer to Customer Repository
@@ -179,6 +190,7 @@ public class ShoppingCartController {
 
         // Save the customer in the session
         session.setAttribute("customer", customer);
+        session.setAttribute("checkoutDataDTO", checkoutDataDTO);
 
         // Save the customer in the model too
         model.addAttribute("customer", customer);

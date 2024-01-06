@@ -119,6 +119,7 @@
         }
 
         .product_quantity {
+            margin-bottom: 20px; /* Adding margin-bottom space */
             display: flex;
             align-items: center;
         }
@@ -199,6 +200,11 @@
             overflow: hidden;
             padding: 15px
         }
+        .image_selected img {
+            max-width: 100%; /* Set max-width to 100% to fit image in container */
+            max-height: 100%; /* Set max-height to 100% to fit image in container */
+            object-fit: contain; /* This specifies how the content should be resized */
+        }
 
         .image_list li {
             display: -webkit-box;
@@ -222,6 +228,10 @@
             -o-transition: all 200ms ease;
             transition: all 200ms ease;
             overflow: hidden
+        }
+        .image_list li img {
+            max-height: 100%; /* Getting image to fit within the container */
+            width: auto; /* Setting auto to maintain aspect ratio */
         }
     </style>
 </head>
@@ -312,7 +322,7 @@
                                 <div class="col-md-7"> </div>
                             </div>
 
-                            <!-- Product options buttons THESE NEED TO WORK!!! -->
+                            <!-- Product options buttons -->
                             <div class="row" style="margin-top: 15px;">
                                 <div class="col-xs-6" style="margin-left: 15px;">
                                     <span class="product_options">Candle Sizes</span><br>
@@ -341,7 +351,7 @@
                         <div class="col-xs-6" style="margin-left: 15px;">
 
                         </div>
-                            <div class="container mt-3"> <!-- Add margin-top to create space -->
+                            <div class="container mt-3 mb-10"> <!-- Add margin-top & margin-bottom to create space -->
 
 
                                      <form action="#" th:action="@{/addToCart}" method="post" th:object="${cartItemDTO}">

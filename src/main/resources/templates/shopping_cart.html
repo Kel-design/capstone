@@ -99,8 +99,8 @@
                 <p class="mb-0" th:text="${cartItem.quantity}"></p>
               </td>
               <td class="align-middle">
-                <!-- Render price -->
-                <p class="mb-0" th:text="${cartItem.product.price}"></p>
+                <!-- Render total price for the item (quantity * price) -->
+                <p class="mb-0" th:text="${cartItem.quantity * cartItem.product.price}"></p>
 
               </td>
             </tr>
@@ -112,6 +112,7 @@
           <div class="card-body p-4">
 
             <div class="row">
+              <!-- Row 1: Radio buttons -->
               <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
                 <form>
                   <div class="d-flex flex-row pb-3">
@@ -151,14 +152,23 @@
                 </form>
               </div>
 
+              <!--  2: Credit card fields -->
 
-              <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                <form th:action="@{/shoppingcart/processCustomerName}" method="post" id="checkoutForm">
-                    <!-- Add input fields for customer payment details -->
+                <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
+                  <form th:action="@{/shoppingcart/processCustomerName}" method="post" id="checkoutForm">
+
+
+                    <!-- Fields for customer payment details -->
+
                     <div class="form-outline mb-4 mb-md-5">
                       <input type="text" id="nameOnCard" class="form-control form-control-lg" name="nameOnCard" placeholder="Full Name" required />
                       <label class="form-label" for="nameOnCard">Name on card</label>
                     </div>
+
+                  <div class="form-outline mb-4 mb-md-5">
+                    <input type="text" id="creditCardNum" class="form-control form-control-lg" name="creditCardNum" placeholder="1111 2222 3333 4444" minlength="16" maxlength="19" required />
+                    <label class="form-label" for="creditCardNum">Card Number</label>
+                  </div>
 
                     <div class="form-outline mb-4 mb-md-5">
                       <input type="text" id="expDate" class="form-control form-control-lg" name="expDate" placeholder="MM/YY"   minlength="5" maxlength="7" required/>
@@ -166,20 +176,16 @@
                     </div>
 
 
-                  <div class="col-md-6">
-                    <div class="form-outline mb-4 mb-md-5">
-                      <input type="text" id="creditCardNum" class="form-control form-control-lg" name="creditCardNum" placeholder="1111 2222 3333 4444" minlength="16" maxlength="19" required />
-                      <label class="form-label" for="creditCardNum">Card Number</label>creditCardNum
-                    </div>
-
                     <div class="form-outline mb-4 mb-md-5">
                       <input type="password" id="securityCode" class="form-control form-control-lg" name="securityCode" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" required />
                       <label class="form-label" for="securityCode">Cvv</label>
                     </div>
-                  </div>
+                </div>
 
-                  <!-- New fields for address -->
-                  <div class="col-md-6">
+
+
+                  <!-- Fields for address -->
+              <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
                     <div class="form-outline mb-4 mb-md-5">
                       <input type="text" id="address" class="form-control form-control-lg" name="address" placeholder="Street Address" required/>
                       <label class="form-label" for="address">Street Address</label>
@@ -189,9 +195,9 @@
                       <input type="text" id="city" class="form-control form-control-lg" name="city" placeholder="City" required/>
                       <label class="form-label" for="city">City</label>
                     </div>
-                  </div>
 
-                  <div class="col-md-6">
+
+
                     <div class="form-outline mb-4 mb-md-5">
                       <input type="text" id="state" class="form-control form-control-lg" name="state" placeholder="State" required />
                       <label class="form-label" for="state">State</label>
@@ -201,22 +207,18 @@
                       <input type="text" id="zipCode" class="form-control form-control-lg" name="zipCode" placeholder="Zip Code" required/>
                       <label class="form-label" for="zipCode">Zip Code</label>
                     </div>
-                  </div>
 
-                  <div class="col-md-6">
                     <div class="form-outline mb-4 mb-md-5">
                       <input type="email" id="email" class="form-control form-control-lg" name="email" placeholder="Email Address" required />
                       <label class="form-label" for="email">Email Address</label>
                     </div>
+                </div>
 
-
-                  </div>
                   <div class="col-lg-4 col-xl-3">
                     <div class="d-flex justify-content-between" style="font-weight: 500;">
                       <p class="mb-2">Subtotal</p>
                       <p class="mb-2" th:text="${subTotal}"></p>
                     </div>
-
                     <div class="d-flex justify-content-between" style="font-weight: 500;">
                       <p class="mb-0">Shipping</p>
                       <p class="mb-0">FREE!</p>
@@ -230,12 +232,13 @@
                     </div>
                       <button type="submit" class="btn btn-primary btn-block btn-lg"><span>Checkout</span>
                       </button>
-
                   </div>
+
                 </form>
+              </div>
                </div>
 
-            </div>
+
 
             </div>
 
@@ -244,7 +247,7 @@
 
       </div>
     </div>
-</div>
+
 </section>
 
 
