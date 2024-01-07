@@ -3,6 +3,8 @@ package com.cupitmadland.capstone.DTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+// Used to hold data obtained during the checkout in order to create a customer and show order details.
 @Data
 @NoArgsConstructor
 public class CheckoutDataDTO {

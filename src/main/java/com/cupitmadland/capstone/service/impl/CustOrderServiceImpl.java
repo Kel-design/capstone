@@ -1,5 +1,6 @@
 package com.cupitmadland.capstone.service.impl;
 
+// Initially created to handle the customer's checkout process, but transitioned to using other services instead.
 import com.cupitmadland.capstone.entity.CustOrder;
 import com.cupitmadland.capstone.entity.Customer;
 import com.cupitmadland.capstone.repository.*;

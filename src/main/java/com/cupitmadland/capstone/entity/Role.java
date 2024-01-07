@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Entity do hold USER role for security check in registration/login
 @Entity
 @Data
 @NoArgsConstructor

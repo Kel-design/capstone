@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
+// Used to save Customer, find Customer by email and check the Customer role.
 @Service
 public class CustomerServiceImpl implements CustomerService {
 

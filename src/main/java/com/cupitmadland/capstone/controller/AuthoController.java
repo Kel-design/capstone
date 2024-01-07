@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+// Used for general page endpoints and handling the Newletter Signup/Registration
 @Controller
 public class AuthoController {
 

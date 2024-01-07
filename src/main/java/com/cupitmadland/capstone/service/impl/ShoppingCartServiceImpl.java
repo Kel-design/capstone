@@ -1,5 +1,7 @@
 package com.cupitmadland.capstone.service.impl;
 
+// Used to save cart items to the Cart Item Repository, get a cart item list,
+// convert the guest cart to the customer cart
 import com.cupitmadland.capstone.entity.CartItem;
 import com.cupitmadland.capstone.entity.Customer;
 import com.cupitmadland.capstone.repository.*;

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+// Entity to hold Customer payment information.
 @Entity
 @Data
 @NoArgsConstructor

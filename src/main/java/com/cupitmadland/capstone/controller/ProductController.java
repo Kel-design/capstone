@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Used to get product details to switch size views in single product page and add items to guest shopping cart
 @Controller
 //@RequestMapping("/products")
 @SessionAttributes("cartItemDTO")
@@ -53,7 +55,7 @@ public class ProductController {
         model.addAttribute("imageBySize", imageBySize);
         model.addAttribute("product", product);
         model.addAttribute("cartItemDTO", cartItemDTO);
-        //model.addAttribute("size", size);
+
 
         return "single_product";
 

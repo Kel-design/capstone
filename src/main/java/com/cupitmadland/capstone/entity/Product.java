@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+// Entity to hold Product information.
 @Entity
 @Data
 @NoArgsConstructor

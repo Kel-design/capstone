@@ -18,6 +18,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+// Used for inside the shopping cart page to enable adding additional items to shopping cart, view the updated cart,
+// process checkout (including separating single 'nameOnCard' into firstName, middleName and lastName) when creating a customer.
 @Controller
 @RequestMapping("/shoppingcart")
 @SessionAttributes({"cartItems", "cartItemDTO","customer", "payment"})

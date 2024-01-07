@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+// Used to save products, find products by id, find a list of products and find products by scent and size
 @Service
 public class ProductServiceImpl implements ProductService {
 

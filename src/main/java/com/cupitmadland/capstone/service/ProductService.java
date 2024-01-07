@@ -4,6 +4,7 @@ import com.cupitmadland.capstone.entity.Product;
 
 import java.util.List;
 
+// Used to get product information both by id and by size and scent
 public interface ProductService {
 
     void saveProduct(Product product);

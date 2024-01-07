@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+// Created for custom Spring Security Filter Chain
 @Configuration
 @EnableWebSecurity
 public class SpringSecurity {

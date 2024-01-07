@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// Used to have access to the CartItem line item including product details and quantity
 @Entity
 @Data
 @NoArgsConstructor

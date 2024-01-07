@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+// Entity to hold Customer information
 @Entity
 @Data
 @NoArgsConstructor

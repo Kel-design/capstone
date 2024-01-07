@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+// Initially created to handle the checkout process, but later broke pieces of this code to use in other areas.
 @Controller
 public class CustOrderController {
 
