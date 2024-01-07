@@ -98,7 +98,7 @@ public class ShoppingCartController {
         model.addAttribute("subTotal", total);
         model.addAttribute("total", total);
         model.addAttribute("cartItemDTO", new CartItemDTO());
-        //Maybe need other model attributes here too
+
 
         return "shopping_cart";
     }
@@ -148,10 +148,10 @@ public class ShoppingCartController {
 
 
 
-        // Store the payment in the session (if needed????)
+        // Store the payment in the model
         model.addAttribute("payment", payment);
 
-        // Process the payment (store in the database)
+
 
         // After saving the payment to the database
         Long orderId = payment.getId();

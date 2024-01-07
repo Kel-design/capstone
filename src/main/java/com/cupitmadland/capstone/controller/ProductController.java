@@ -16,7 +16,6 @@ import java.util.List;
 
 // Used to get product details to switch size views in single product page and add items to guest shopping cart
 @Controller
-//@RequestMapping("/products")
 @SessionAttributes("cartItemDTO")
 public class ProductController {
 
@@ -26,7 +25,7 @@ public class ProductController {
     public ProductController(ProductService productService) {this.productService = productService;}
 
 
-    @GetMapping("/product/{productId}/details") //adding details to get size as well (Should this be "/single_product/{productId}"??)
+    @GetMapping("/product/{productId}/details") //adding details to get size as well
     public String getProductDetails
             (@PathVariable Long productId, @RequestParam(name = "size", required = false, defaultValue = "Large")
             String size, Model model){
