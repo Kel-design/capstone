@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    
+
     /**
      * Custom query to find a Customer by email.
      *
