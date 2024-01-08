@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
-// Used to save Customer, find Customer by email and check the Customer role.
+/**
+ * Implementation of teh CustomerService interface.
+ * Used to save customer information, find customers by email, and manage customer roles.
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -44,10 +47,12 @@ public class CustomerServiceImpl implements CustomerService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Saves customer information, encodes the password, assigns a default role, and sets a default username if necessary.
+     * @param customer The customer to be saved.
+     */
     @Override
     public void saveCustomer(Customer customer) {
-        //need to write code here!
-
 
         customer.setEmail(customer.getEmail());
 
@@ -69,17 +74,33 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.save(customer);
     }
 
+    /**
+     * Find a customer by email.
+     *
+     * @param email The email of the customer to be found.
+     * @return The customer with the specified email.
+     */
     @Override
     public Customer findCustomerByEmail(String email) {
         return customerRepository.findByEmail(email);
     }
 
+    /**
+     * Finds all customers.
+     *
+     * @return A list of all customers.
+     */
     @Override
     public List<Customer> findAllCustomer() {
         List<Customer> customerList = customerRepository.findAll();
         return customerList;
     }
 
+    /**
+     * Checks if the role "ROLE-USER" exists; creates and returns if not found.
+     * 
+     * @return The "ROLE_USER" role.
+     */
     private Role checkRoleExist(){
         Role role = new Role();
         role.setName("ROLE_USER");
