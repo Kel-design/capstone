@@ -7,7 +7,11 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
-// Initially created to handle the customer order, but later used CartItem for further break down of CartItem line items.
+/**
+ * Initially created to handle the customer order, but later used CartItem for further break down of CartItem line items.
+ * Saving to possibly use in future improvements when separating shopping cart and checkout process.
+  */
+
 @Entity
 @Data
 @NoArgsConstructor
