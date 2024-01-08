@@ -7,21 +7,31 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-
-// Entity do hold USER role for security check in registration/login
+/**
+ * Entity class representing a Role, used for security checks in registration/login
+ */
 @Entity
 @Data
 @NoArgsConstructor
 @Table
 public class Role {
-        @Id
+
+    /**
+     * The unique identifier for the Role.
+     */
+    @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    /**
+     * The name of the Role.
+     */
         @Column(nullable = false, unique = true)
     String name;
 
-    //Creating a @ManyToMany entity relationship for Customer to Role using customer_id and role_id
+    /**
+     * The list of Customers associated with the Role.
+     */
         @ManyToMany(mappedBy = "roles")
         List<Customer> customerList = new ArrayList<>();
 }
