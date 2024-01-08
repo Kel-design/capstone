@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 /**
- * Initially created to handle the checkout process, but later used pieces of this code in other areas.
+ * FUTURE USE: Initially created to handle the checkout process, but later used pieces of this code in other areas.
  * However, keeping it here to possibly use in future fixes of separating the shopping cart and the checkout process.
  */
 @Controller

@@ -5,6 +5,9 @@ import com.cupitmadland.capstone.entity.Customer;
 
 import java.util.List;
 
+/**
+ * FUTURE USE: will use this interface when separating shopping cart and checkout processes.
+ */
 public interface CustOrderService {
 
     // Save a new customer order
