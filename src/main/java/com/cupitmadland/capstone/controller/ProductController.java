@@ -15,16 +15,37 @@ import java.util.List;
 
 
 // Used to get product details to switch size views in single product page and add items to guest shopping cart
+
+/**
+ * Controller class for managing product-related operations, including retrieving product details,
+ * switching size views in the single product page, adding items to the guest shopping cart,
+ * and handling API requests to retrieve products by size and scent.
+ * Handles interactions related to product details and shopping cart functionality.
+ */
 @Controller
 @SessionAttributes("cartItemDTO")
 public class ProductController {
 
+    // Autowired dependency for the controller
     private final ProductService productService;
 
+    /**
+     * Constructor for ProductController
+     *
+     * @param productService Service for product-related operations.
+     */
     @Autowired
     public ProductController(ProductService productService) {this.productService = productService;}
 
 
+    /**
+     * Retrieve and display product details based on the productId and optional size parameter.
+     *
+     * @param productId Long representing the unique identifier of the product.
+     * @param size      String representing the size of the product (optional).
+     * @param model     Model object for adding attributes.
+     * @return String representing the view name for the single product page.
+     */
     @GetMapping("/product/{productId}/details") //adding details to get size as well
     public String getProductDetails
             (@PathVariable Long productId, @RequestParam(name = "size", required = false, defaultValue = "Large")
@@ -48,18 +69,24 @@ public class ProductController {
 
         CartItemDTO cartItemDTO = new CartItemDTO();
         cartItemDTO.setProductId(product.getId());
-
-
+        
         //pass the product details to the view
         model.addAttribute("imageBySize", imageBySize);
         model.addAttribute("product", product);
         model.addAttribute("cartItemDTO", cartItemDTO);
 
-
         return "single_product";
 
     }
 
+    /**
+     * Add the specified product to the guest shopping cart.
+     *
+     * @param cartItemDTO   CartItemDTO containing information about the item to be added.
+     * @param model         Model object for adding attributes.
+     * @param session       HttpSession for managing the session attributes.
+     * @return String representing the redirection to the shopping cart view page.
+     */
     @PostMapping("/addToCart")
     public String addToCart(
             @ModelAttribute("cartItemDTO") CartItemDTO cartItemDTO,
@@ -80,6 +107,12 @@ public class ProductController {
         return "redirect:/shoppingcart/view";
     }
 
+    /**
+     * Add the specified CartItem to the shopping cart in the session.
+     *
+     * @param session   HttpSession for managing the session attributes.
+     * @param cartItem  CartItem to be added to the shopping cart.
+     */
     private void addToShoppingCart(HttpSession session, CartItem cartItem){
         List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
@@ -93,8 +126,13 @@ public class ProductController {
         cartItems.add(cartItem);
     }
 
-
-    //Method to handle API endpoint to retrieve product by size AND scent and return a JSON response
+    /**
+     * Handle API endpoint to retrieve a product by size and scent, returning a JSON response.
+     *
+     * @param size  String representing the size of the product.
+     * @param scent String representing the scent of the product.
+     * @return      Product entity in JSON format.
+     */
     @GetMapping("/api/product/{size}/{scent}")
     @ResponseBody
     public Product getProductBySizeAndScent(@PathVariable String size, @PathVariable String scent) {
