@@ -7,27 +7,45 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
-// Used to hold Shopping Cart information.
+/**
+ * Entity class representing a Shopping Cart, holding cart information.
+ */
 @Entity
 @Data
 @NoArgsConstructor
 public class ShoppingCart {
 
+    /**
+     * The unique identifier for the Shopping Cart.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    /**
+     * The total price of the items in the Shopping Cart.
+     */
     BigDecimal price;
 
+    /**
+     * The total quantity of the items in the Shopping Cart.
+     */
     Integer quantity;
 
+    /**
+     * The subtotal of the items in the Shopping Cart.
+     */
     BigDecimal subtotal;
 
-    //Creating @OneToMany entity relationship for ShoppingCart and Product using shoppingCart_id
+    /**
+     * The list of Products associated with the Shopping Cart.
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart")
     private List<Product> productList;
 
-    //Creating @OneToMany entity relationship for ShoppingCart and CartItem using shoppingCart_id
+    /**
+     * The list of CartItems associated with the Shopping Cart.
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart")
     private List<CartItem> cartItemList;
 
