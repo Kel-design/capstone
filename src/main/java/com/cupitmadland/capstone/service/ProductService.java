@@ -42,5 +42,5 @@ public interface ProductService {
      * @return The found product or null if not found.
      */
     Product findProductBySizeAndScent(String size, String scent);
-    
+
 }
