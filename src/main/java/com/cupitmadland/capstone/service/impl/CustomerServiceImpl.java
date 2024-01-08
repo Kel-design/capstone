@@ -98,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     /**
      * Checks if the role "ROLE-USER" exists; creates and returns if not found.
-     * 
+     *
      * @return The "ROLE_USER" role.
      */
     private Role checkRoleExist(){
