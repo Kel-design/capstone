@@ -100,7 +100,7 @@ public class ShoppingCartController {
             // Set other properties of newCartItem if needed
             newCartItem.setQuantity(cartItemDTO.getProductQuantity());
             newCartItem.setProductId(cartItemDTO.getProductId());
-            
+
             // Add the newCartItem to the shopping cart
             shoppingCartService.addToCart(newCartItem);
         }
