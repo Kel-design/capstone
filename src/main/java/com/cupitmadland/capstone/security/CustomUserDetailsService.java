@@ -10,17 +10,31 @@ import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
-// Used to help process User registration and login
+/**
+ * Custom implementation of Spring Security's UserDetailsService.
+ * Used to process user registration and login.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private CustomerRepository customerRepository;
 
+    /**
+     * Constructs a new CustomUserDetailsService.
+     *
+     * @param customerRepository The repository for accessing customer-related data.
+     */
     public CustomUserDetailsService(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;
     }
 
 
+    /**
+     * Load user details by username (email).
+     * @param email The email (username) of the user.
+     * @return UserDetails containing user information.
+     * @throws UsernameNotFoundException If the user is not found.
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
