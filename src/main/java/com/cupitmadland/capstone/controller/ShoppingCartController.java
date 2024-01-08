@@ -112,7 +112,7 @@ public class ShoppingCartController {
 
 
 
-        // Retrieve the cart items and customer from the session
+        // Retrieve the cart items from customer
         List<CartItem> cartItems =customer.getCartItems();
 
         // Set payment-specific attributes from the checkout form
@@ -179,10 +179,10 @@ public class ShoppingCartController {
             firstName = nameParts[0];
         }
         if (nameParts.length > 1){
-            middleName = nameParts[1];
+            lastName = nameParts[1];
         }
         if (nameParts.length > 2){
-            lastName = nameParts[2];
+            middleName = nameParts[2];
         }
 
         // Create a new Customer instance
