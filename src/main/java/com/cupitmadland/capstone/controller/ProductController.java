@@ -69,7 +69,7 @@ public class ProductController {
 
         CartItemDTO cartItemDTO = new CartItemDTO();
         cartItemDTO.setProductId(product.getId());
-        
+
         //pass the product details to the view
         model.addAttribute("imageBySize", imageBySize);
         model.addAttribute("product", product);
