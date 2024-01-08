@@ -84,7 +84,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         // Retrieve the guest cart items from the session
         List<CartItem> guestCartItems = (List<CartItem>) session.getAttribute("cartItems");
-        
+
 
         if (guestCartItems !=null && !guestCartItems.isEmpty()) {
             // Set the customer for each guest cart item and add them to the customer's cart
