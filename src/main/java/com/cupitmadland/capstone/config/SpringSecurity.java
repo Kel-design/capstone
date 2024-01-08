@@ -10,14 +10,31 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 // Created for custom Spring Security Filter Chain
+
+/**
+ * Configuration class for customizing the Spring Security Filter Chain.
+ * Provides bean for password encoder and configures security setting for various endpoints.
+ */
 @Configuration
 @EnableWebSecurity
 public class SpringSecurity {
 
+    /**
+     * Bean definition for a BCryptPasswordEncode to be used for password encoding.
+     *
+     * @return PasswordEncoder instance using BCrypt hashing algorithm.
+     */
     @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();}
 
+    /**
+     * Configures the Spring Security Filter Chain for various endpoints and security settings.
+     *
+     * @param http HttpSecurity object for configuring security settings.
+     * @return SecurityFilterChain instance representing the configured security filter chain.
+     * @throws Exception if an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
             http.csrf(csrf -> csrf.disable())
