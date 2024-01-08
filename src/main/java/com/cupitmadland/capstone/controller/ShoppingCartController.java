@@ -18,13 +18,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-// Used for inside the shopping cart page to enable adding additional items to shopping cart, view the updated cart,
-// process checkout (including separating single 'nameOnCard' into firstName, middleName and lastName) when creating a customer.
+/**
+ * Controller class for managing shopping cart operations, including adding items, viewing the cart and processing checkout.
+ * Handles interactions related to the shopping cart page and checkout process.
+ */
 @Controller
 @RequestMapping("/shoppingcart")
 @SessionAttributes({"cartItems", "cartItemDTO","customer", "payment"})
 public class ShoppingCartController {
 
+    // Autowired dependencies for the controller
     private final ShoppingCartService shoppingCartService;
 
     private final ProductRepository productRepository;
@@ -37,6 +40,16 @@ public class ShoppingCartController {
 
     private final CartItemRepository cartItemRepository;
 
+    /**
+     * Constructor for ShoppingCartController.
+     *
+     * @param shoppingCartService       Service for shopping cart operations.
+     * @param productRepository         Repository for Product entities.
+     * @param shoppingCartRepository    Repository for ShoppingCart entities.
+     * @param customerRepository        Repository for Customer entities.
+     * @param paymentRepository         Repository for Payment entities.
+     * @param cartItemRepository        Repository for CartItem entities.
+     */
     @Autowired
     public  ShoppingCartController(ShoppingCartService shoppingCartService, ProductRepository productRepository,
                                    ShoppingCartRepository shoppingCartRepository, CustomerRepository customerRepository,
@@ -49,9 +62,23 @@ public class ShoppingCartController {
         this.cartItemRepository = cartItemRepository;
     }
 
+    /**
+     * Display the shopping cart page.
+     *
+     * @return String representing the view name for the shopping cart page.
+     */
     @GetMapping("")
     public String shoppingCart() { return "shopping_cart"; }
 
+
+    /**
+     * Handle the addition of items to the shopping cart.
+     *
+     * @param cartItemDTO   CartItemDTO containing information about the item to be added.
+     * @param model         Model object for adding attributes.
+     * @param session       HTTPSession for managing session attributes.
+     * @return String representing the redirection to the cart view page.
+     */
     @PostMapping("/addToCart")
     public String addToCart(@ModelAttribute CartItemDTO cartItemDTO, Model model, HttpSession session){
 
@@ -73,8 +100,7 @@ public class ShoppingCartController {
             // Set other properties of newCartItem if needed
             newCartItem.setQuantity(cartItemDTO.getProductQuantity());
             newCartItem.setProductId(cartItemDTO.getProductId());
-
-
+            
             // Add the newCartItem to the shopping cart
             shoppingCartService.addToCart(newCartItem);
         }
@@ -82,10 +108,16 @@ public class ShoppingCartController {
         cartItems = shoppingCartService.getCartItemList();
         session.setAttribute("cartItems", cartItems);
 
-
         return "redirect:/shoppingcart/view"; //Redirect to the cart view page
     }
 
+    /**
+     * Display the cart view page, showing the items in the shopping cart.
+     *
+     * @param model     Model object for adding attributes.
+     * @param session   HttpSession for managing session attributes.
+     * @return String representing the view name for the cart view page.
+     */
     @GetMapping("/view")
     public String viewCart(Model model, HttpSession session){
         // Retrieve the cart from the session
@@ -99,18 +131,25 @@ public class ShoppingCartController {
         model.addAttribute("total", total);
         model.addAttribute("cartItemDTO", new CartItemDTO());
 
-
         return "shopping_cart";
     }
 
+    /**
+     * Process the checkout, including handling payment and saving order details.
+     *
+     * @param payment           Payment entity containing payment information.
+     * @param session           HttpSession for managing session attributes.
+     * @param customer          Customer entity containing customer information.
+     * @param model             Model object for adding attributes.
+     * @param checkoutDataDTO   CheckoutDataDTO containing additional checkout information.
+     * @return String representing the redirection to the order details page.
+     */
     // Checkout process
     @GetMapping("/checkout")
     public String processCheckout(Payment payment,
                                   HttpSession session,
                                   @ModelAttribute Customer customer,
                                   Model model,@ModelAttribute CheckoutDataDTO checkoutDataDTO){
-
-
 
         // Retrieve the cart items from customer
         List<CartItem> cartItems =customer.getCartItems();
@@ -122,7 +161,6 @@ public class ShoppingCartController {
 
         // Set the customer associated with the payment (NEED NAME SPLITTING HERE)
         payment.setCustomer(customer);
-
 
         // Set the cart items associated with the payment
         // Loop over cartItems telling each cartItem which payment it is associated with
@@ -136,9 +174,6 @@ public class ShoppingCartController {
        }
         payment.setCartItems(cartItems);
 
-
-
-
         // Save the payment info with the customer & then re-save customer in Customer Repository
         customer.getPaymentList().add(payment);
         customerRepository.save(customer);
@@ -146,22 +181,25 @@ public class ShoppingCartController {
         // Save the payment info to the Payment Repository
         paymentRepository.save(payment);
 
-
-
         // Store the payment in the model
         model.addAttribute("payment", payment);
-
-
 
         // After saving the payment to the database
         Long orderId = payment.getId();
 
         return "redirect:/shoppingcart/order_details/" + payment.getId();
 
-
-
     }
 
+    /**
+     * Process the customer's name during the checkout process.
+     *
+     * @param nameOnCard        String representing the name on the payment card.
+     * @param session           HttpSession for managing session attributes.
+     * @param model             Model object for adding attributes.
+     * @param checkoutDataDTO   CheckoutDataDTO containing additional checkout information.
+     * @return String representing the redirection to the checkout page.
+     */
     @PostMapping("/processCustomerName")
     public String processCustomerName(@ModelAttribute("nameOnCard") String nameOnCard,
                                       HttpSession session, Model model, @ModelAttribute CheckoutDataDTO checkoutDataDTO){
@@ -212,6 +250,7 @@ public class ShoppingCartController {
         return "redirect:/shoppingcart/checkout";
     }
 
+    // Helper method to calculate subTotal (if needed)
     private BigDecimal calculateSubTotal(List<CartItem> cartItems){
 
         // Sum up all items in the cart
@@ -222,6 +261,7 @@ public class ShoppingCartController {
 
     }
 
+    // Helper method to calculate total
     private BigDecimal calculateTotal(List<CartItem> cartItems){
 
         // Sum up all items in the cart
@@ -232,6 +272,13 @@ public class ShoppingCartController {
 
     }
 
+    /**
+     * Display order details for a given payment ID.
+     *
+     * @param paymentId Long representing the payment ID.
+     * @param model     Model object for adding attributes.
+     * @return String representing the view name for the order details page.
+     */
     @GetMapping("/order_details/{paymentId}")
     public String viewOrderDetails(@PathVariable Long paymentId, Model model){
         // Retrieve order details from the database using paymentId
@@ -242,6 +289,4 @@ public class ShoppingCartController {
 
         return "order_details";
     }
-
-
 }
