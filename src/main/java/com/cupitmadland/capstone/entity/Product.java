@@ -6,37 +6,56 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-// Entity to hold Product information.
+
+/**
+ * Entity class representing a Product, holding product information.
+ */
 @Entity
 @Data
 @NoArgsConstructor
 public class Product {
 
+    /**
+     * The unique identifier for the Product.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
+    /**
+     * The name of the Product.
+     */
     String name;
 
+    /**
+     * The description of the Product.
+     */
     String description;
 
+    /**
+     * The scent of the Product.
+     */
     private String scent;
 
+    /**
+     * The size of the Product.
+     */
     private String size;
 
+    /**
+     * The price of the Product.
+     */
     BigDecimal price;
 
+    /**
+     * The stock quantity of the Product.
+     */
     Integer stockQuantity;
 
-    //Creating a @ManyToOne entity relationship for Product and CustOrder using custOrder_id
-   // @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "custOrder_id")
-    //private CustOrder custOrder;
-
-    //Creating a @ManyToOne entity relationship for Product and ShoppingCart using shoppingCart_id
+    /**
+     * The ShoppingCart associated with the Product.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shoppingCart_id")
     private ShoppingCart shoppingCart;
-
 
 }
