@@ -112,7 +112,7 @@ public class Customer {
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<CartItem> cartItems = new ArrayList<>();
-    
+
     /**
      * Adds a list of CartItems to the Customer's cartItems list and sets the customer reference for each CartItem.
      * @param cartItems The list of CartItems to be associated with the Customer.
