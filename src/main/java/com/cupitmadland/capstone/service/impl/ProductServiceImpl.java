@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-// Used to save products, find products by id, find a list of products and find products by scent and size
+
+/**
+ * Implementation of the ProductService interface.
+ * Used to save products, find products by ID, find a list of products, and find products by scent and size.
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -42,7 +46,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    // Saves a product to the database.
+    /**
+     * Save a product to the database.
+     *
+     * @param product The product to be saved.
+     * @throws IllegalArgumentException If the product is null.
+     */
     @Override
     public void saveProduct(Product product) {
     if (product == null){
@@ -52,6 +61,13 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
+    /**
+     * Finds a product by its ID.
+     *
+     * @param id The ID of the product to be found.
+     * @return The product with the specified ID.
+     * @throws ProductNotFoundException If no product is found with the specified ID.
+     */
     @Override
     public Product findProductById(Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
@@ -65,11 +81,24 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    /**
+     * Finds all products in the database.
+     *
+     * @return A list of all products.
+     */
     @Override
     public List<Product> findAllProduct() {
         List<Product> productList = productRepository.findAll();
         return productList;
     }
+
+    /**
+     * Finds a product by its size and scent.
+     *
+     * @param size The size of the product.
+     * @param scent The scent of the product.
+     * @return The product with the specified size and scent, or null if not found.
+     */
 
     @Override
     public Product findProductBySizeAndScent(String size, String scent) {
